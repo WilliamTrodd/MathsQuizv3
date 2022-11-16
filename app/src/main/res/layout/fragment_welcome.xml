@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Welcome">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/instruct"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        />
+
+    <Switch
+        android:id="@+id/multiplySwitch"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="@string/mult"
+        android:checked="false"
+        />
+
+    <Switch
+        android:id="@+id/addSwitch"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:checked="false"
+        />
+
+    <Switch
+        android:id="@+id/divideSwitch"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="@string/divide"
+        android:checked="false"
+        />
+
+    <Switch
+        android:id="@+id/subtractSwitch"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sub"
+        android:checked="false"
+        />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/start" />
+
+
+</LinearLayout>
