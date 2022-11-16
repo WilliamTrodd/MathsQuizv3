@@ -12,7 +12,7 @@ import androidx.navigation.findNavController
 
 class Welcome : Fragment() {
 
-    var multiply: Int = 0
+    var multiply: Int = 1
     var divide: Int = 0
     var subtract: Int = 0
     var addition: Int = 0
@@ -48,6 +48,7 @@ class Welcome : Fragment() {
 
 
         startButton.setOnClickListener {
+            // TODO - Add validation for options //
             val action = WelcomeDirections
                             .actionWelcomeToGameFragment(multiply, divide, addition, subtract)
             view.findNavController()

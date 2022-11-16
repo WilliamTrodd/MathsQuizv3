@@ -17,8 +17,8 @@ class GameFragment : Fragment() {
     var num1: Int = -1
     var num2: Int = -1
     var ans: Int = -1
-    var totalTime: Long = 10
-    var timeLeft: Int = 10
+    var totalTime: Long = 60
+    var timeLeft: Int = 60
     var score: Int = 0
 
     override fun onCreateView(
@@ -38,7 +38,7 @@ class GameFragment : Fragment() {
             score += checkAns(ans, userAns.text.toString().toInt())
             println(score.toString())
             tvQuestion.text = generateQuestion(userChoices)
-            userAns.setText(ans.toString())
+            userAns.setText("")
         }
 
         object: CountDownTimer(totalTime*1000, 1000) {
@@ -86,7 +86,7 @@ class GameFragment : Fragment() {
             questionTypeChoice = (0..3).random()
             println(questionTypeChoice)
         }
-
+        // TODO - update randomness //
         when (questionTypeChoice) {
             0 -> {
                 num1 = (1..13).random()
