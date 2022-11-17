@@ -19,9 +19,12 @@
         android:name="com.example.mathsquizv3.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" >
+        <!-- app:popUpTo="@id/welcome" allows us to go "back" to -->
         <action
             android:id="@+id/action_gameFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/resultFragment"
+            app:popUpTo="@id/welcome"
+            />
         <argument
             android:name="multiply"
             app:argType="integer" />
