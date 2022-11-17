@@ -24,11 +24,14 @@ class Welcome : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_welcome, container, false)
         val startButton = view.findViewById<Button>(R.id.start)
+        // these switches are a little out-dated. there are newer alternatives
         val multSwitch = view.findViewById<Switch>(R.id.multiplySwitch)
         val addSwitch = view.findViewById<Switch>(R.id.addSwitch)
         val divSwitch = view.findViewById<Switch>(R.id.divideSwitch)
         val subtractSwitch = view.findViewById<Switch>(R.id.subtractSwitch)
 
+
+        // these check for if each switch is on or off, if they are then it sets a flag to one, if not, they get set to 0
         multSwitch.setOnCheckedChangeListener{ _, isChecked ->
             if(isChecked) "multSwitch:ON" else "multSwitch:OFF"
             multiply = 1 - multiply
@@ -50,7 +53,7 @@ class Welcome : Fragment() {
         startButton.setOnClickListener {
             // TODO - Add validation for options //
             val action = WelcomeDirections
-                            .actionWelcomeToGameFragment(multiply, divide, addition, subtract)
+                            .actionWelcomeToGameFragment(multiply, divide, addition, subtract) // this passes the 4 flag values to the next fragment
             view.findNavController()
                 .navigate(action)
         }

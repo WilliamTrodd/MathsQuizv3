@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:textSize="20sp"
         />
-
+    <!-- These control the 4 switches, note the android:text=@string/___ , this lets us define the value of the text based on the strings.xml file-->
     <Switch
         android:id="@+id/multiplySwitch"
         android:layout_width="180dp"

@@ -27,7 +27,7 @@
         android:gravity="center"
         android:text="@string/question" />
 
-
+    <!-- you could change this to TextView, and add buttons for data entry underneath. This might make the app more immersive -->
     <EditText
         android:id="@+id/editTextNumber"
         android:padding="30dp"
