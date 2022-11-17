@@ -41,10 +41,19 @@ class GameFragment : Fragment() {
 
 
         // this block of code tells the app what to do when the submit button is clicked
+        // TODO - validation for data entry
         submitButton.setOnClickListener {
-            score += checkAns(ans, userAns.text.toString().toInt()) // this checks whether the user has entered the correct answer and adds 1 to the score if they have
-            tvQuestion.text = generateQuestion(userChoices) // This updates the question to a new one - generateQuestion(userChoices) will create a new question
-            userAns.setText("") // This clears the users answer box
+            if(userAns.text.toString() == ""){
+                println("no data entered") // TODO - set up a warning TextView //
+            } else {
+                score += checkAns(
+                    ans,
+                    userAns.text.toString().toInt()
+                ) // this checks whether the user has entered the correct answer and adds 1 to the score if they have
+                tvQuestion.text =
+                    generateQuestion(userChoices) // This updates the question to a new one - generateQuestion(userChoices) will create a new question
+                userAns.setText("") // This clears the users answer box
+            }
         }
 
 
