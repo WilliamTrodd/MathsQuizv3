@@ -75,7 +75,6 @@ class GameFragment : Fragment() {
         }
 
         // this block of code tells the app what to do when the submit button is clicked
-        // TODO - validation for data entry
         submitButton.setOnClickListener {
             if(userAns.text.toString() == ""){
                 println("no data entered") // TODO - set up a warning TextView //

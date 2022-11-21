@@ -54,7 +54,6 @@ class Welcome : Fragment() {
         timePerQuestion = 60
 
         startButton.setOnClickListener {
-            // TODO - Add validation for options //
             if(multiply == 1 || addition == 1 || divide == 1 || subtract == 1) {
                 val level = view.findViewById<Spinner>(R.id.levelSelect).selectedItem
                 timePerQuestion = getGameMode(level.toString())
