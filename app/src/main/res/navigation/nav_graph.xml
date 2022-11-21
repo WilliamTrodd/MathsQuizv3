@@ -37,6 +37,9 @@
         <argument
             android:name="subtract"
             app:argType="integer" />
+        <argument
+            android:name="timePerQuestion"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"

@@ -18,8 +18,8 @@ class GameFragment : Fragment() {
     var num1: Int = -1
     var num2: Int = -1
     var ans: Int = -1
-    var totalTime: Long = 60 // this will run the timer for 60 seconds
-    var timeLeft: Int = 60 // this will be decremented by the timer
+    var numQs: Int = 0
+    var timeLeft: Int = 10 // this will be decremented by the timer
     var score: Int = 0 // this will be incremented for each correct answer
 
     override fun onCreateView(
@@ -27,10 +27,15 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        val timePerQuestion = GameFragmentArgs.fromBundle(requireArguments()).timePerQuestion
+
+
         val view = inflater.inflate(R.layout.fragment_game, container, false)
         val tvQuestion: TextView = view.findViewById<TextView>(R.id.question) as TextView //This is the text display for the question
         val countdown: TextView = view.findViewById<TextView>(R.id.countdown) as TextView //This is the text display for the timer
-
+        if(timePerQuestion.toInt() == 0){
+            countdown.visibility=View.INVISIBLE
+        }
         //This is the text box for entering the answer - It could be changed to a TextView, and adding buttons for the user to enter the answer
         val userAns: EditText = view.findViewById<EditText>(R.id.editTextNumber) as EditText
 
@@ -39,6 +44,35 @@ class GameFragment : Fragment() {
         // This allows us to control the submit button
         val submitButton = view.findViewById<Button>(R.id.submitAns)
 
+        fun newQuestion(timer: CountDownTimer) {
+            if (numQs == 10){
+                timer.cancel()
+                endGame()
+            } else {
+                numQs += 1
+                println(numQs)
+                tvQuestion.text = generateQuestion(userChoices)
+                if(timePerQuestion.toInt() != 0) {
+                    timer.cancel()
+                    timeLeft = timePerQuestion.toInt()
+                    timer.start()
+                }
+            }
+        }
+
+        // this starts a timer that runs for totalTime seconds - we can use this variable to set different levels\
+        var questionTimer = object: CountDownTimer(timePerQuestion*1000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeft -= 1
+                println(timeLeft)
+                countdown.text = timeLeft.toString()
+            }
+
+            override fun onFinish() {
+                // when the timer has finished, we move to the next fragment
+                newQuestion(this)
+            }
+        }
 
         // this block of code tells the app what to do when the submit button is clicked
         // TODO - validation for data entry
@@ -50,33 +84,24 @@ class GameFragment : Fragment() {
                     ans,
                     userAns.text.toString().toInt()
                 ) // this checks whether the user has entered the correct answer and adds 1 to the score if they have
-                tvQuestion.text =
-                    generateQuestion(userChoices) // This updates the question to a new one - generateQuestion(userChoices) will create a new question
                 userAns.setText("") // This clears the users answer box
+                newQuestion(questionTimer)
             }
         }
 
-
-        // this starts a timer that runs for totalTime seconds - we can use this variable to set different levels
-        object: CountDownTimer(totalTime*1000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                timeLeft -= 1
-                countdown.text = timeLeft.toString()
-            }
-
-            override fun onFinish() {
-                // when the timer has finished, we move to the next fragment
-                val finalScore = score
-                val action = GameFragmentDirections
-                                .actionGameFragmentToResultFragment(finalScore) // this line allows us to pass the finalScore variable to the next fragment
-                view.findNavController()
-                    .navigate(action)
-            }
-        }.start()
-
-        tvQuestion.text = generateQuestion(userChoices) // sets the first question
+        newQuestion(questionTimer)
 
         return view
+    }
+
+    private fun endGame() {
+
+            val finalScore = score
+            val action = GameFragmentDirections
+                .actionGameFragmentToResultFragment(finalScore) // this line allows us to pass the finalScore variable to the next fragment
+            view?.findNavController()
+                ?.navigate(action)
+
     }
 
     private fun parseChoices(): BooleanArray {

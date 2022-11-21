@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.Switch
 import androidx.navigation.findNavController
 
@@ -16,6 +17,7 @@ class Welcome : Fragment() {
     var divide: Int = 0
     var subtract: Int = 0
     var addition: Int = 0
+    var timePerQuestion: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,15 +51,29 @@ class Welcome : Fragment() {
             subtract = 1 - subtract
         }
 
+        timePerQuestion = 60
 
         startButton.setOnClickListener {
             // TODO - Add validation for options //
+
+            val level = view.findViewById<Spinner>(R.id.levelSelect).selectedItem
+            timePerQuestion = getGameMode(level.toString())
+
             val action = WelcomeDirections
-                            .actionWelcomeToGameFragment(multiply, divide, addition, subtract) // this passes the 4 flag values to the next fragment
+                            .actionWelcomeToGameFragment(multiply, divide, addition, subtract, timePerQuestion) // this passes the 4 flag values to the next fragment
             view.findNavController()
                 .navigate(action)
         }
         return view
+    }
+
+    fun getGameMode(level: String): Long {
+        return when(level) {
+            "Easy" -> 0
+            "Medium" -> 10
+            "Hard" -> 5
+            else -> 120
+        }
     }
 
 }
