@@ -95,13 +95,11 @@ class GameFragment : Fragment() {
     }
 
     private fun endGame() {
-
             val finalScore = score
             val action = GameFragmentDirections
                 .actionGameFragmentToResultFragment(finalScore) // this line allows us to pass the finalScore variable to the next fragment
             view?.findNavController()
                 ?.navigate(action)
-
     }
 
     private fun parseChoices(): BooleanArray {

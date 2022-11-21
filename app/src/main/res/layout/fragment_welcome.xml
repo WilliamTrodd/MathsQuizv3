@@ -20,7 +20,7 @@
         android:id="@+id/multiplySwitch"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:checked="true"
+        android:checked="false"
         android:minHeight="48dp"
         android:text="@string/mult" />
 

@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 
 class Welcome : Fragment() {
 
-    var multiply: Int = 1
+    var multiply: Int = 0
     var divide: Int = 0
     var subtract: Int = 0
     var addition: Int = 0
@@ -55,14 +55,21 @@ class Welcome : Fragment() {
 
         startButton.setOnClickListener {
             // TODO - Add validation for options //
+            if(multiply == 1 || addition == 1 || divide == 1 || subtract == 1) {
+                val level = view.findViewById<Spinner>(R.id.levelSelect).selectedItem
+                timePerQuestion = getGameMode(level.toString())
 
-            val level = view.findViewById<Spinner>(R.id.levelSelect).selectedItem
-            timePerQuestion = getGameMode(level.toString())
-
-            val action = WelcomeDirections
-                            .actionWelcomeToGameFragment(multiply, divide, addition, subtract, timePerQuestion) // this passes the 4 flag values to the next fragment
-            view.findNavController()
-                .navigate(action)
+                val action = WelcomeDirections
+                    .actionWelcomeToGameFragment(
+                        multiply,
+                        divide,
+                        addition,
+                        subtract,
+                        timePerQuestion
+                    ) // this passes the 4 flag values to the next fragment
+                view.findNavController()
+                    .navigate(action)
+            }
         }
         return view
     }
