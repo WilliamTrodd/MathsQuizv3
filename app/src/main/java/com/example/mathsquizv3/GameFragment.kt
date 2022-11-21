@@ -33,9 +33,7 @@ class GameFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game, container, false)
         val tvQuestion: TextView = view.findViewById<TextView>(R.id.question) as TextView //This is the text display for the question
         val countdown: TextView = view.findViewById<TextView>(R.id.countdown) as TextView //This is the text display for the timer
-        if(timePerQuestion.toInt() == 0){
-            countdown.visibility=View.INVISIBLE
-        }
+        if(timePerQuestion.toInt() == 0) countdown.visibility=View.INVISIBLE
         //This is the text box for entering the answer - It could be changed to a TextView, and adding buttons for the user to enter the answer
         val userAns: EditText = view.findViewById<EditText>(R.id.editTextNumber) as EditText
 
@@ -117,10 +115,7 @@ class GameFragment : Fragment() {
 
     // checks for equivalence of 2 numbers, returns either 1 or 0. this is used to add a score.
     private fun checkAns(num1: Int, num2: Int): Int{
-        if(num1 == num2) {
-            return 1
-        }
-        return 0
+        return if(num1 == num2) 1 else 0
     }
 
     // this generates a new question based on our array of true/false values
@@ -141,14 +136,14 @@ class GameFragment : Fragment() {
                 num1 = (1..13).random()
                 num2 = (1..13).random()
                 ans = num1 * num2
-                return(num1.toString() + " x " + num2.toString())
+                return("$num1 x $num2")
             }
             1 -> {
                 // addition
                 num1 = (1..50).random()
                 num2 = (1..50).random()
                 ans = num1 + num2
-                return(num1.toString() + " + " + num2.toString())
+                return("$num1 + $num2")
             }
             2 -> {
                 // subtraction
@@ -161,14 +156,14 @@ class GameFragment : Fragment() {
                     num2 = temp
                 }
                 ans = num1-num2
-                return(num1.toString() + " - " + num2.toString())
+                return("$num1 - $num2")
             }
             3 -> {
                 // division
                 num1 = (1..13).random()
                 ans = (1..13).random()
                 num2 = num1*ans
-                return(num2.toString() + " / " + num1.toString())
+                return("$num2 / $num1")
             }
         }
         // if something goes wrong, the question will be set to this
