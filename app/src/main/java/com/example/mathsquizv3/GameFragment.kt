@@ -19,7 +19,6 @@ class GameFragment : Fragment() {
     var num2: Int = -1
     var ans: Int = -1
     var numQs: Int = 0
-    var timeLeft: Int = 10 // this will be decremented by the timer
     var score: Int = 0 // this will be incremented for each correct answer
 
     override fun onCreateView(
@@ -28,6 +27,7 @@ class GameFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val timePerQuestion = GameFragmentArgs.fromBundle(requireArguments()).timePerQuestion
+        var timeLeft = timePerQuestion.toInt()
 
 
         val view = inflater.inflate(R.layout.fragment_game, container, false)
@@ -48,7 +48,7 @@ class GameFragment : Fragment() {
                 endGame()
             } else {
                 numQs += 1
-                println(numQs)
+                //println(numQs)
                 tvQuestion.text = generateQuestion(userChoices)
                 if(timePerQuestion.toInt() != 0) {
                     timer.cancel()
@@ -62,7 +62,7 @@ class GameFragment : Fragment() {
         var questionTimer = object: CountDownTimer(timePerQuestion*1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeft -= 1
-                println(timeLeft)
+                //println(timeLeft)
                 countdown.text = timeLeft.toString()
             }
 
